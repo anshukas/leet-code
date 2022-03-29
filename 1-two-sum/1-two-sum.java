@@ -1,3 +1,4 @@
+  // brute force Algo
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         // brute force Algo
