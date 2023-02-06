@@ -1,14 +1,22 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        // to check two string are anagram we can sort both string.
-        char[] str1 = s.toCharArray();
-        char[] str2 = t.toCharArray();
+        // using hashMap logic.
         
-        // sort
-        Arrays.sort(str1);
-        Arrays.sort(str2);
+        if(s.length() != t.length())
+            return false;
         
-        return Arrays.equals(str1, str2);
-    
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s.toCharArray()) { 
+        	map.put(c, map.getOrDefault(c, 0) + 1); 
+         } 
+        for(Character c : t.toCharArray()){
+            if(map.containsKey(c)){
+                if(map.get(c) == 1)
+                    map.remove(c);
+                else
+                    map.put(c,map.get(c)-1);
+            }
+        }
+       return map.isEmpty();
     }
 }
