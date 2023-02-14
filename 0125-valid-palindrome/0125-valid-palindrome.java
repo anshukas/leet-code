@@ -1,17 +1,14 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        StringBuilder builder = new StringBuilder();
+        // so here we need to first avoid space or no digit char
+        // compare the string with reversed
+        StringBuffer buffer = new StringBuffer();
         
-        for(char ch : s.toCharArray()){
-            
+        for (char ch : s.toCharArray()){
             if(Character.isLetterOrDigit(ch)){
-                builder.append(Character.toLowerCase(ch));
+                buffer.append(Character.toLowerCase(ch));
             }
         }
-        
-        String filteredString = builder.toString();
-        String reversedString = builder.reverse().toString();
-        
-        return filteredString.equals(reversedString);
+        return buffer.toString().equals(buffer.reverse().toString());
     }
 }
