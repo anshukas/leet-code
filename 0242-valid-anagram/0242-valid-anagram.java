@@ -1,22 +1,23 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        // using hashMap logic.
-        
+        // 1. if s!=t then it should not be anagram.
         if(s.length() != t.length())
             return false;
         
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c : s.toCharArray()) { 
-        	map.put(c, map.getOrDefault(c, 0) + 1); 
-         } 
-        for(Character c : t.toCharArray()){
-            if(map.containsKey(c)){
-                if(map.get(c) == 1)
-                    map.remove(c);
-                else
-                    map.put(c,map.get(c)-1);
-            }
+        // count each char keep in map
+        Map<Character,Integer> countCharMap = new HashMap<>();
+        for(char c: s.toCharArray()){
+            countCharMap.put(c,countCharMap.getOrDefault(c,0)+1);
         }
-       return map.isEmpty();
+        // itrate t and remove if count 1 or dec the count of char and check map.isEmpty. If yes it is anagram.
+        for(char c: t.toCharArray()){
+            if(countCharMap.containsKey(c))
+                if(countCharMap.get(c) == 1)
+                    countCharMap.remove(c);
+                else{
+                    countCharMap.put(c,countCharMap.get(c) -1);
+                }
+        }
+        return countCharMap.isEmpty();
     }
 }
