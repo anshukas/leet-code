@@ -1,17 +1,23 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        // basically if both string are anagram then if we sroted it. it should be equal.
         if(s.length() != t.length())
             return false;
+        // count each char in s and keep in map
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c: s.toCharArray()){
+            map.put(c, map.getOrDefault(c,0)+1);
+        }
         
-        // convert to charArray to use sorting.
-        char[] sArry = s.toCharArray();
-        char[] tArry = t.toCharArray();
-        Arrays.sort(sArry);
-        Arrays.sort(tArry);
-        
-        return Arrays.equals(sArry, tArry);
+        for(char c: t.toCharArray()){
+            if(map.containsKey(c)){
+                int count = map.get(c);
+                if(count ==1) 
+                    map.remove(c);
+                else{
+                    map.put(c,map.get(c)-1);
+                }
+            }
+        }
+        return map.isEmpty();
     }
-    // Time complexity: O(nlogn)
-    // Space complexity: O(1)
 }
