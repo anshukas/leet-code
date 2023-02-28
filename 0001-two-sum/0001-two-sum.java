@@ -1,15 +1,17 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         // brute force
-        for(int i=0; i< nums.length -1; i++){
-            int firstNum = nums[i];
-            for(int j=i+1; j < nums.length; j++){
-                int secNum = nums[j];
-                int sum = firstNum + secNum;
-                if(sum == target)
-                    return new int[] {i,j};
+        // Map to create track of prev diff
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<nums.length; i++){
+            // 9-2=7
+            // 9-7=2
+            int diff = target - nums[i];
+            if(map.containsKey(diff)){
+                return new int[]{map.get(diff), i};
             }
+            map.put(nums[i],i);
         }
-        return new int[0];
+        return new int[] {};
     }
 }
